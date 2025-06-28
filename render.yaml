@@ -9,6 +9,6 @@ services:
         value: production
       - key: APP_DEBUG
         value: false
-      - key: base64:9cZ5hGtQlbU0scpoYMRN5bzdhiDyKDbl4+98w7rROLk=
-        generateValue: true
+      - key: APP_KEY
+        value: base64:9cZ5hGtQlbU0scpoYMRN5bzdhiDyKDbl4+98w7rROLk=
     autoDeploy: true
