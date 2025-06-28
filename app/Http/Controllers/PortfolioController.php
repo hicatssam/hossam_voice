@@ -49,7 +49,7 @@ class PortfolioController extends Controller
         try {
             \Illuminate\Support\Facades\Mail::send([], [], function ($message) use ($request) {
                 $message->to(config('mail.from.address'))
-                    ->subject('New Contact Form Message - Hicats Sam Portfolio')
+                    ->subject('New Contact Form Message - Hossam Portfolio')
                     ->html("
                         <h2>New Contact Form Submission</h2>
                         <p><strong>Name:</strong> {$request->name}</p>

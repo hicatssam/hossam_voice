@@ -9,7 +9,7 @@ return [
         'gallery' => 'Gallery',
         'contact' => 'Contact',
     ],
-    
+
     'hero' => [
         'subtitle' => 'AI Evolution Meets Human Voice',
         'title' => 'In a world moving faster than sound',
@@ -17,9 +17,9 @@ return [
         'hear_voice' => 'Hear My Voice',
         'view_portfolio' => 'View Portfolio',
     ],
-    
+
     'about' => [
-        'title' => 'About Hicats Sam',
+        'title' => 'About Hossam',
         'description' => 'Professional voice-over artist specializing in commercial narration, documentary work, and AI-enhanced projects',
         'multilingual' => [
             'title' => 'Multilingual Expertise',
@@ -34,12 +34,12 @@ return [
             'description' => '10+ years experience with major brands, documentaries, and character voice work.',
         ],
     ],
-    
+
     'trusted_by' => [
         'title' => 'Trusted By',
         'description' => 'Professional partnerships with news networks, educational institutions, and media organizations across the Middle East',
     ],
-    
+
     'samples' => [
         'title' => 'Voice Samples',
         'description' => 'Explore diverse voice-over projects across different categories',
@@ -51,7 +51,7 @@ return [
             'ai' => 'AI Projects',
         ],
     ],
-    
+
     'services' => [
         'title' => 'Professional Services',
         'description' => 'Comprehensive voice-over solutions for all your audio needs',
@@ -80,12 +80,12 @@ return [
             'description' => 'Real-time recording sessions with professional studio setup and immediate delivery.',
         ],
     ],
-    
+
     'gallery' => [
         'title' => 'Studio Gallery',
         'description' => 'Behind-the-scenes look at professional voice-over production',
     ],
-    
+
     'contact' => [
         'title' => 'Get In Touch',
         'description' => 'Ready to bring your project to life? Let\'s discuss your voice-over needs',

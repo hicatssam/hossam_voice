@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('portfolio.hero.title') }} - Hicats Sam</title>
+    <title>{{ __('portfolio.hero.title') }} - Hossam </title>
     <meta name="description" content="{{ __('portfolio.hero.description') }}">
 
     <!-- Enhanced Fonts -->
@@ -2091,7 +2091,7 @@
                 </div>
                 <div class="hero-image" data-aos="fade-left" data-aos-delay="300">
                     <div class="professional-photo-container">
-                        <img src="{{ asset('images/profile2.JPG') }}" alt="Hicats Sam - Professional AI-Enhanced Voice Artist">
+                        <img src="{{ asset('images/profile2.JPG') }}" alt="Hossam - Professional AI-Enhanced Voice Artist">
                         <div class="ai-background-removal"></div>
                         <div class="professional-glow"></div>
                     </div>
@@ -2374,244 +2374,89 @@
 
     <!-- Client Feedback Section with Enhanced Client Images -->
     <section id="feedback" class="feedback">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>{{ $locale === 'ar' ? 'آراء العملاء' : 'Client Feedback' }}</h2>
-                <p>{{ $locale === 'ar' ? 'اكتشف ما يقوله عملائي عن جودة خدمات التعليق الصوتي' : 'Discover what my clients say about the quality of voice-over services' }}</p>
-            </div>
-            <div class="feedback-container">
-                <div class="feedback-scroll-container">
-                    <!-- First Row - Scrolling Right -->
-                    <div class="feedback-scroll-row">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>{{ $locale === 'ar' ? 'آراء العملاء' : 'Client Feedback' }}</h2>
+            <p>{{ $locale === 'ar' ? 'اكتشف ماذا قال عملائي عن خدماتي في التعليق الصوتي' : 'Discover what my clients said about my voice-over services' }}</p>
+        </div>
+        <div class="feedback-container">
+            <div class="feedback-scroll-container">
+                <div class="feedback-scroll-row">
+
+                    @php
+                        $feedbacks = [
+                            [
+                                'text_ar' => 'ما شاء الله على الصوت، شكرًا أخي حسام، فعلاً محترف ومتمكن من عملك. ليست المرة الأولى ولن تكون الأخيرة.',
+                                'text_en' => 'MashaAllah, thank you Hossam. You’re truly professional and skilled. Not the first time I work with you and certainly not the last.',
+                                'name' => 'Younes',
+                                'title' => 'Magic Intro',
+                                'image' => 'clients/younes.png'
+                            ],
+                            [
+                                'text_ar' => 'التعامل كان مريح جدًا والفويس أوفر ممتاز، ما احتاج تعديلات. يعطيك العافية حسام.',
+                                'text_en' => 'The process was smooth, and the voice-over was perfect with no need for edits. Thanks, Hossam!',
+                                'name' => 'Ahmed',
+                                'title' => 'Motion Graphics Designer',
+                                'image' => 'clients/ahmed.png'
+                            ],
+                            [
+                                'text_ar' => 'الصوت ممتاز جدًا. مبدع والله يا حسام، كل تعاملي هيكون معك دائمًا بإذن الله.',
+                                'text_en' => 'Amazing voice, truly creative. All my future projects will be with you, God willing!',
+                                'name' => 'Dalal',
+                                'title' => 'Graphic Designer',
+                                'image' => 'clients/dalal.png'
+                            ],
+                            [
+                                'text_ar' => 'أحد أرقى الأصوات التي تعاملت معها، صوته مميز وتعامل راقٍ واحترافي. أنصح به بشدة.',
+                                'text_en' => 'One of the finest voices I’ve worked with. Professional, smooth, and highly recommended!',
+                                'name' => 'Huda',
+                                'title' => 'Mass Media',
+                                'image' => 'clients/huda.png'
+                            ],
+                            [
+                                'text_ar' => 'عمل مميز وأداء جميل، تجربتنا معكم في لورا كانت رائعة وستتكرر بإذن الله.',
+                                'text_en' => 'Excellent work and performance. Our experience with you at Laura was great and will be repeated, God willing.',
+                                'name' => 'Anas Nadeem',
+                                'title' => 'Graphic Designer',
+                                'image' => 'clients/anas.png'
+                            ],
+                            [
+                                'text_ar' => 'خدمة صوتية احترافية بمعايير عالية. نوصي بشدة بالتعامل مع السيد حسام لأي مشروع يحتاج إلى تعليق صوتي احترافي وموثوق.',
+                                'text_en' => 'Highly professional voice-over service. We strongly recommend Mr. Hossam for any project requiring a reliable and professional voice.',
+                                'name' => 'Hind Marmash',
+                                'title' => 'Media Plus Company',
+                                'image' => 'clients/hind.png'
+                            ]
+                        ];
+                    @endphp
+
+                    @foreach ($feedbacks as $feedback)
                         <div class="feedback-card">
                             <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
+                                @for ($i = 0; $i < 5; $i++)
+                                    <span class="star">★</span>
+                                @endfor
                             </div>
                             <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"صوت هقاط سام محترف جداً ومميز. أنجز مشروع الإعلان التجاري بجودة عالية وفي الوقت المحدد. أنصح به بشدة لأي مشروع يحتاج إلى تعليق صوتي احترافي."' : '"Hicats Sam\'s voice is extremely professional and distinctive. He completed the commercial project with high quality and on time. I highly recommend him for any project requiring professional voice-over."' }}
+                                {{ $locale === 'ar' ? '"' . $feedback['text_ar'] . '"' : '"' . $feedback['text_en'] . '"' }}
                             </p>
                             <div class="client-info">
                                 <div class="client-avatar">
-                                    <img src="{{ asset('images/7enews_1750670748696.webp') }}" alt="Ahmed Al-Masri">
+                                    <img src="{{ asset('images/' . $feedback['image']) }}" alt="{{ $feedback['name'] }}">
                                 </div>
                                 <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'أحمد المصري' : 'Ahmed Al-Masri' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مدير إنتاج - قناة 7E News' : 'Production Manager - 7E News Channel' }}</p>
+                                    <h4>{{ $feedback['name'] }}</h4>
+                                    <p>{{ $feedback['title'] }}</p>
                                 </div>
                             </div>
                         </div>
+                    @endforeach
 
-                    <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"تعاملت مع هقاط سام في عدة مشاريع ودائماً ما يبهرني بمهارته في تنويع النبرات وقدرته على إيصال الرسالة بوضوح. خدمة عملاء ممتازة ومرونة في التعديلات."' : '"I worked with Hicats Sam on several projects and he always amazes me with his skill in voice modulation and ability to convey messages clearly. Excellent customer service and flexibility in revisions."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/logo1_1750670748698.png') }}" alt="Sarah Al-Ahmad">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'سارة الأحمد' : 'Sarah Al-Ahmad' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مديرة التسويق - مطعم مكبوس' : 'Marketing Manager - Makboos Restaurant' }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"صوت دافئ ومعبر، مناسب جداً للبرامج الوثائقية. هقاط سام فنان محترف يفهم متطلبات العمل الإعلامي ويسلم في الوقت المحدد. شراكة ناجحة ومثمرة."' : '"Warm and expressive voice, perfect for documentaries. Hicats Sam is a professional artist who understands media work requirements and delivers on time. A successful and fruitful partnership."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/alquds-2_1750670748696.png') }}" alt="Mohammed Al-Quds">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'محمد القدس' : 'Mohammed Al-Quds' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'منتج تنفيذي - صحيفة القدس' : 'Executive Producer - Al-Quds Newspaper' }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Duplicate first set for seamless loop -->
-                        <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"صوت هقاط سام محترف جداً ومميز. أنجز مشروع الإعلان التجاري بجودة عالية وفي الوقت المحدد. أنصح به بشدة لأي مشروع يحتاج إلى تعليق صوتي احترافي."' : '"Hicats Sam\'s voice is extremely professional and distinctive. He completed the commercial project with high quality and on time. I highly recommend him for any project requiring professional voice-over."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/7enews_1750670748696.webp') }}" alt="Ahmed Al-Masri">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'أحمد المصري' : 'Ahmed Al-Masri' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مدير إنتاج - قناة 7E News' : 'Production Manager - 7E News Channel' }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"تعاملت مع هقاط سام في عدة مشاريع ودائماً ما يبهرني بمهارته في تنويع النبرات وقدرته على إيصال الرسالة بوضوح. خدمة عملاء ممتازة ومرونة في التعديلات."' : '"I worked with Hicats Sam on several projects and he always amazes me with his skill in voice modulation and ability to convey messages clearly. Excellent customer service and flexibility in revisions."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/logo1_1750670748698.png') }}" alt="Sarah Al-Ahmad">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'سارة الأحمد' : 'Sarah Al-Ahmad' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مديرة التسويق - مطعم مكبوس' : 'Marketing Manager - Makboos Restaurant' }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Second Row - Scrolling Left -->
-                    <div class="feedback-scroll-row">
-                        <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"خبرة واسعة في مجال التعليق الصوتي للمؤسسات التعليمية. صوت واضح وملائم للطلاب، مع إمكانية التحكم في السرعة والنبرة حسب المحتوى التعليمي."' : '"Extensive experience in voice-over for educational institutions. Clear and suitable voice for students, with ability to control speed and tone according to educational content."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/Alrowad_1750670748697.png') }}" alt="Fatima Al-Rowad">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'فاطمة الرواد' : 'Fatima Al-Rowad' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مديرة المحتوى - مدارس الرواد النموذجية' : 'Content Manager - Al-Rowad Model Schools' }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"مواعيد دقيقة وجودة صوت استثنائية. هقاط سام يتميز بالمهنية العالية والقدرة على فهم متطلبات العميل بسرعة وتنفيذها بإتقان."' : '"Precise timing and exceptional sound quality. Hicats Sam stands out with high professionalism and ability to quickly understand client requirements and execute them perfectly."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/MEDIA PLUS_1750670748698.png') }}" alt="Khalid Media">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'خالد الإعلامي' : 'Khalid Al-Alami' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مدير الإنتاج - ميديا بلس' : 'Production Director - Media Plus' }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"تعاون مثمر في مشاريع متعددة. صوت متميز ومرونة في التعامل مع متطلبات العمل المختلفة. أنصح بالتعامل معه للحصول على نتائج احترافية."' : '"Fruitful collaboration on multiple projects. Distinctive voice and flexibility in dealing with different work requirements. I recommend working with him for professional results."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/rasel-logo_1750670748699.png') }}" alt="Nadia Rasel">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'نادية راسل' : 'Nadia Rasel' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مديرة العلاقات العامة - راسل' : 'Public Relations Manager - Rasel' }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Duplicate second set for seamless loop -->
-                        <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"خبرة واسعة في مجال التعليق الصوتي للمؤسسات التعليمية. صوت واضح وملائم للطلاب، مع إمكانية التحكم في السرعة والنبرة حسب المحتوى التعليمي."' : '"Extensive experience in voice-over for educational institutions. Clear and suitable voice for students, with ability to control speed and tone according to educational content."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/Alrowad_1750670748697.png') }}" alt="Fatima Al-Rowad">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'فاطمة الرواد' : 'Fatima Al-Rowad' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مديرة المحتوى - مدارس الرواد النموذجية' : 'Content Manager - Al-Rowad Model Schools' }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="feedback-card">
-                            <div class="stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"مواعيد دقيقة وجودة صوت استثنائية. هقاط سام يتميز بالمهنية العالية والقدرة على فهم متطلبات العميل بسرعة وتنفيذها بإتقان."' : '"Precise timing and exceptional sound quality. Hicats Sam stands out with high professionalism and ability to quickly understand client requirements and execute them perfectly."' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/MEDIA PLUS_1750670748698.png') }}" alt="Khalid Media">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $locale === 'ar' ? 'خالد الإعلامي' : 'Khalid Al-Alami' }}</h4>
-                                    <p>{{ $locale === 'ar' ? 'مدير الإنتاج - ميديا بلس' : 'Production Director - Media Plus' }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Contact Info Section -->
     <section id="contact-info" class="contact-info">
@@ -2626,33 +2471,33 @@
                         <i class="fas fa-phone"></i>
                     </div>
                     <h3>{{ $locale === 'ar' ? 'هاتف' : 'Phone' }}</h3>
-                    <p><a href="tel:+970592123456">+972 569 896 990</a></p>
-                    <p><a href="tel:+966501234567">+966 50 123 4567</a></p>
+                    <p><a href="tel:+972 595 359 631">+972 595 359 631</a></p>
+                    <p><a href="tel:+972 595 359 631">+972 595 359 631</a></p>
                 </div>
                 <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
                     <h3>{{ $locale === 'ar' ? 'بريد إلكتروني' : 'Email' }}</h3>
-                    <p><a href="mailto:hicats.sam@gmail.com">hicats.sam@gmail.com</a></p>
-                    <p><a href="mailto:voice@hicatssam.com">voice@hicatssam.com</a></p>
+                    <p><a href="mailto:hossam.vo.pale@gmail.com">hossam.vo.pale@gmail.com</a></p>
+                    <p><a href="mailto:hossam.vo.pale@gmail.com">hossam.vo.pale@gmail.com</a></p>
                 </div>
                 <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="contact-icon">
                         <i class="fab fa-whatsapp"></i>
                     </div>
                     <h3>{{ $locale === 'ar' ? 'واتساب' : 'WhatsApp' }}</h3>
-                    <p><a href="https://wa.me/970592123456">+970 592 123 456</a></p>
+                    <p><a href="https://wa.me/972595359631">+972 595 359 631</a></p>
                     <p>{{ $locale === 'ar' ? 'متاح 24/7 للاستشارات' : 'Available 24/7 for consultations' }}</p>
                 </div>
-                <div class="contact-card" data-aos="fade-up" data-aos-delay="400">
+                {{-- <div class="contact-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="contact-icon">
                         <i class="fab fa-linkedin"></i>
                     </div>
                     <h3>{{ $locale === 'ar' ? 'لينكدإن' : 'LinkedIn' }}</h3>
                     <p><a href="https://linkedin.com/in/hicatssam" target="_blank">linkedin.com/in/hicatssam</a></p>
                     <p>{{ $locale === 'ar' ? 'شبكة مهنية' : 'Professional Network' }}</p>
-                </div>
+                </div> --}}
                 <div class="contact-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="contact-icon">
                         <i class="fab fa-telegram"></i>
@@ -2666,7 +2511,7 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <h3>{{ $locale === 'ar' ? 'ساعات العمل' : 'Working Hours' }}</h3>
-                    <p>{{ $locale === 'ar' ? 'الأحد - الخميس: 9:00 - 18:00' : 'Sunday - Thursday: 9:00 - 18:00' }}</p>
+                    <p>{{ $locale === 'ar' ? 'السبت - الخميس: 9:00 - 5:00 ' : 'Satuarday - Thursday: 9:00 - 5:00' }}</p>
                     <p>{{ $locale === 'ar' ? 'طوارئ: متاح في أي وقت' : 'Emergency: Available anytime' }}</p>
                 </div>
             </div>
