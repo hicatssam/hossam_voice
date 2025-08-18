@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{{ __('portfolio.hero.title') }} - Hossam </title>
     <meta name="description" content="{{ __('portfolio.hero.description') }}">
 
@@ -23,8 +24,126 @@
 
     <!-- Custom CSS -->
     <style>
+
+
+
+
+    .feedback-scroll-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        margin-top: 2rem;
+    }
+
+    .feedback-scroll-container {
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .feedback-scroll-row {
+        display: flex;
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
+
+    .feedback-card {
+        flex: 0 0 auto;
+        width: 320px;
+        background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .feedback-card:hover {
+        transform: scale(1.03);
+    }
+
+    .stars {
+        color: #FFD700;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .scroll-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: #ff6f61;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0.6rem 1rem;
+        border-radius: 50%;
+        transition: background 0.3s ease;
+    }
+
+    .scroll-arrow:hover {
+        background: #e65347;
+    }
+
+    .scroll-arrow.left {
+        left: -10px;
+    }
+
+    .scroll-arrow.right {
+        right: -10px;
+    }
+
+    .client-info {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    .client-avatar img {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+        border: 2px solid #ff6f61;
+    }
+
+    .client-details h4 {
+        margin: 0;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .client-details p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #777;
+    }
+
+    .feedback-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #444;
+        min-height: 100px;
+    }
+
+    @media (max-width: 768px) {
+        .feedback-card {
+            width: 280px;
+        }
+
+        .scroll-arrow {
+            font-size: 1.5rem;
+        }
+    }
+
         /* Enhanced CSS Variables */
         :root {
+
             --carbon-blue: #0a0f1a;
             --electric-violet: #7F5AF0;
             --mint-green: #2CB67D;
@@ -56,14 +175,14 @@
             scroll-behavior: smooth;
         }
 
-        body {
-            font-family: {{ $locale === 'ar' ? "'Tajawal', 'Amiri', sans-serif" : "'Montserrat', 'Inter', sans-serif" }};
-            background: linear-gradient(135deg, var(--carbon-blue) 0%, #1a1a2e 50%, #16213e 100%);
-            color: var(--soft-gray);
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-weight: 400;
-        }
+       body {
+        font-family: {{ $locale === 'ar' ? "'Cario', sans-serif" : "'Inter', sans-serif" }};
+        background: linear-gradient(135deg, var(--carbon-blue) 0%, #1a1a2e 50%, #16213e 100%);
+        color: var(--soft-gray);
+        line-height: 1.6;
+        overflow-x: hidden;
+        font-weight: 400;
+    }
 
         .container {
             max-width: 1200px;
@@ -159,25 +278,70 @@
         }
 
         /* Enhanced Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            z-index: 999;
-            padding: 20px 0;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
+        /* القائمة الرئيسية */
+.navbar {
+    width: 100%;
+    background-color: #111; /* لون خلفية الشريط */
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
 
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.navbar .nav-links {
+    display: flex;
+    justify-content: space-between; /* توزيع العناصر بشكل متساوي */
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap; /* لجعلها متجاوبة */
+}
+
+.navbar .nav-links li {
+    margin: 0 10px; /* المسافة بين العناصر */
+}
+
+.navbar .nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px; /* حجم النص */
+    font-weight: 500;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+    color: #ff9100; /* لون عند المرور */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        flex-direction: column;
+        width: 100%;
+        display: none; /* سيتم إظهارها عند الضغط على أيقونة الموبايل */
+    }
+
+    .navbar .nav-links li {
+        margin: 10px 0;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+/* أيقونة الموبايل */
+.mobile-menu-toggle span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
 
         .logo {
             font-size: 2rem;
@@ -323,6 +487,50 @@
             left: 20%;
             animation-delay: 4s;
         }
+
+
+        /* تحريك العنصر عند الظهور */
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-left {
+    animation: fadeInLeft 1s ease-out forwards;
+}
+
+.fade-right {
+    animation: fadeInRight 1s ease-out forwards;
+}
+
+/* أنيميشن عند التمرير */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.6s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
         @keyframes advancedFloat {
             0%, 100% {
@@ -621,239 +829,311 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 137, 6, 0); }
         }
 
-        /* Voice Samples Section */
-        .samples {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--carbon-blue) 100%);
-            position: relative;
-            overflow: hidden;
+      @keyframes pulse {
+    0% { transform: scale(1); box-shadow:0 0 0 0 rgba(255,137,6,0.65); }
+    70% { transform: scale(1.08); box-shadow:0 0 0 18px rgba(255,137,6,0); }
+    100% { transform: scale(1); box-shadow:0 0 0 0 rgba(255,137,6,0); }
+}
+
+/* الحاوية العامة للقسم */
+.samples {
+    padding: 70px 0 90px;
+    background: linear-gradient(135deg, var(--dark-gray) 0%, var(--carbon-blue) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* تأثير خلفي خفيف */
+.samples::before,
+.samples::after {
+    content:"";
+    position:absolute;
+    width:480px;
+    height:480px;
+    background:radial-gradient(circle at center, rgba(127,90,240,0.25), transparent 70%);
+    filter:blur(40px);
+    z-index:0;
+    pointer-events:none;
+}
+.samples::before { top:-160px; left:-140px; }
+.samples::after  { bottom:-180px; right:-120px; }
+
+/* رأس القسم */
+.section-header {
+    text-align:center;
+    margin:0 auto 50px;
+    max-width:900px;
+    position:relative;
+    z-index:1;
+}
+.section-header h2 {
+    font-size:2.65rem;
+    font-weight:900;
+    margin:0 0 18px;
+    line-height:1.18;
+    background:linear-gradient(135deg, var(--electric-violet), var(--mint-green));
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.section-header p {
+    font-size:1.06rem;
+    color:var(--soft-gray);
+    line-height:1.55;
+    margin:0 auto;
+    max-width:640px;
+}
+
+
+ .audio-player audio,
+        audio {
+            height: 44px; /* ensure enough height for built-in controls */
+            min-width: 180px;
         }
 
-        /* Enhanced Sample Filters */
-        .sample-filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 50px 0;
-            padding: 30px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
+        audio {
+            background: #111;
+            border-radius: 14px;
         }
 
-        .sample-filters::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg,
-                rgba(127, 90, 240, 0.05) 0%,
-                rgba(44, 182, 125, 0.05) 50%,
-                rgba(255, 137, 6, 0.05) 100%);
-            animation: filterBackgroundShift 8s ease-in-out infinite;
-            z-index: 1;
+        /* Force showing native controls in WebKit/Blink if something hid them */
+        audio::-webkit-media-controls-panel,
+        audio::-webkit-media-controls-enclosure {
+            display: flex !important;
+            opacity: 1 !important;
         }
 
-        @keyframes filterBackgroundShift {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.02); }
+        audio::-webkit-media-controls-play-button {
+            display: block !important;
+            opacity: 1 !important;
         }
 
-        .filter-btn {
-            position: relative;
-            z-index: 2;
-            padding: 15px 30px;
-            border: 2px solid var(--glass-border);
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--soft-gray);
-            border-radius: 35px;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            backdrop-filter: blur(15px);
-            overflow: hidden;
-            min-width: 120px;
-            text-align: center;
+        /* Remove any accidental scaling that might hide buttons */
+        audio * {
+            transform: none !important;
         }
 
-        .filter-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent);
-            transition: left 0.6s ease;
-            z-index: 1;
+        /* Optional: high contrast for dark background */
+        audio::-webkit-media-controls-timeline,
+        audio::-webkit-media-controls-volume-slider {
+            filter: none !important;
         }
 
-        .filter-btn::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg,
-                var(--electric-violet),
-                var(--mint-green),
-                var(--bright-orange),
-                var(--electric-violet));
-            background-size: 400% 400%;
-            border-radius: 37px;
-            z-index: -1;
-            opacity: 0;
-            animation: gradientShift 4s ease-in-out infinite;
-            transition: opacity 0.5s ease;
-        }
+/* مجموعة الفلاتر */
+.sample-filters {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    margin:32px auto 18px;
+    padding:16px 18px;
+    background:var(--glass-bg);
+    backdrop-filter:blur(18px);
+    border:1px solid var(--glass-border);
+    border-radius:28px;
+    position:relative;
+    z-index:2;
+}
 
-        .filter-btn:hover::before {
-            left: 100%;
-        }
+/* زر الفلتر */
+.filter-btn {
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 22px;
+    background:rgba(255,255,255,0.02);
+    border:1px solid var(--glass-border);
+    border-radius:40px;
+    color:var(--soft-gray);
+    font-size:0.9rem;
+    font-weight:600;
+    letter-spacing:0.6px;
+    text-transform:uppercase;
+    cursor:pointer;
+    outline:none;
+    line-height:1;
+    transition:
+        background 0.35s ease,
+        color 0.35s ease,
+        transform 0.25s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+    backdrop-filter:blur(10px);
+    user-select:none;
+}
+.filter-btn:hover {
+    background:rgba(127,90,240,0.15);
+    color:var(--white);
+    transform:translateY(-2px);
+    box-shadow:0 6px 20px -4px rgba(127,90,240,0.35);
+}
+.filter-btn:active {
+    transform:translateY(0);
+    box-shadow:0 3px 12px -4px rgba(127,90,240,0.35);
+}
+.filter-btn.active {
+    background:linear-gradient(135deg,var(--electric-violet), var(--mint-green));
+    color:var(--white);
+    border-color:transparent;
+    box-shadow:0 10px 28px -6px rgba(127,90,240,0.55);
+    transform:translateY(-3px);
+}
+.filter-btn.active::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    background:linear-gradient(135deg,var(--electric-violet), var(--mint-green));
+    filter:blur(18px);
+    opacity:0.25;
+    z-index:-1;
+}
 
-        .filter-btn:hover {
-            border-color: var(--electric-violet);
-            color: var(--electric-violet);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(127, 90, 240, 0.4);
-            text-shadow: 0 0 15px rgba(127, 90, 240, 0.5);
-        }
+/* شبكة العينات */
+.samples-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:26px;
+    margin-top:42px;
+    position:relative;
+    z-index:2;
+}
 
-        .filter-btn:hover::after {
-            opacity: 0.7;
-        }
+/* البطاقة */
+.sample-card {
+    position:relative;
+    background:linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    backdrop-filter:blur(14px);
+    border:1px solid var(--glass-border);
+    border-radius:22px;
+    padding:26px 26px 24px;
+    overflow:hidden;
+    transition:
+        transform 0.55s cubic-bezier(.23,1,.32,1),
+        box-shadow 0.55s cubic-bezier(.23,1,.32,1),
+        border-color 0.4s ease;
+}
+.sample-card::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(127,90,240,0.18), transparent 60%),
+        radial-gradient(circle at 85% 75%, rgba(0,255,198,0.18), transparent 65%);
+    opacity:0.55;
+    pointer-events:none;
+    transition:opacity 0.5s ease;
+}
+.sample-card:hover {
+    transform:translateY(-10px) scale(1.018);
+    border-color:var(--electric-violet);
+    box-shadow:0 18px 42px -10px rgba(127,90,240,0.45);
+}
+.sample-card:hover::before { opacity:0.75; }
 
-        .filter-btn.active {
-            background: linear-gradient(135deg, var(--electric-violet), var(--mint-green));
-            border-color: transparent;
-            color: white;
-            box-shadow: 0 15px 40px rgba(127, 90, 240, 0.6);
-            transform: translateY(-3px) scale(1.1);
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-        }
+/* رأس البطاقة */
+.sample-header {
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin:0 0 18px;
+}
+.sample-icon {
+    flex:0 0 auto;
+    width:56px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.35rem;
+    color:var(--white);
+    background:linear-gradient(135deg,var(--electric-violet), var(--mint-green));
+    border-radius:50%;
+    box-shadow:0 10px 25px -6px rgba(127,90,240,0.55);
+    position:relative;
+    overflow:hidden;
+}
+.sample-icon::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at 35% 30%, rgba(255,255,255,0.35), transparent 65%);
+    mix-blend-mode:overlay;
+    opacity:0.85;
+}
+.sample-info h3 {
+    font-size:1.15rem;
+    font-weight:700;
+    color:var(--white);
+    margin:0 0 4px;
+    line-height:1.25;
+}
+.sample-category {
+    margin:0;
+    color:var(--electric-violet);
+    font-weight:600;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    letter-spacing:0.75px;
+    opacity:0.9;
+}
 
-        .filter-btn.active::after {
-            opacity: 1;
-        }
+/* الوصف */
+.sample-description {
+    color:var(--soft-gray);
+    line-height:1.55;
+    font-size:0.92rem;
+    margin:0 0 16px;
+}
 
-        .filter-btn.active:hover {
-            transform: translateY(-8px) scale(1.15);
-            box-shadow: 0 20px 50px rgba(127, 90, 240, 0.7);
-        }
+/* مشغل الصوت */
+.audio-player {
+    margin:0 0 14px;
+    position:relative;
+}
+.audio-player audio {
+    width:100%;
+    display:block;
+    height:42px;
+    border-radius:14px;
+    background:#222;
+    outline:none;
+}
 
-        .samples::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(127, 90, 240, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(44, 182, 125, 0.1) 0%, transparent 50%);
-            animation: backgroundFlow 10s ease-in-out infinite;
-            z-index: 1;
-        }
+/* المدة */
+.sample-duration {
+    text-align:right;
+    color:var(--mint-green);
+    font-weight:600;
+    font-size:0.78rem;
+    letter-spacing:0.5px;
+    opacity:0.9;
+}
 
-        @keyframes backgroundFlow {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
-            33% { transform: scale(1.1) rotate(2deg); opacity: 0.8; }
-            66% { transform: scale(0.95) rotate(-1deg); opacity: 0.6; }
-        }
+/* حالة لا يوجد نتائج */
+.samples-grid.empty::before {
+    content:attr(data-empty-text);
+    grid-column:1/-1;
+    text-align:center;
+    padding:50px 20px;
+    color:var(--soft-gray);
+    font-size:1rem;
+    font-weight:500;
+    border:1px dashed var(--glass-border);
+    border-radius:18px;
+    background:rgba(255,255,255,0.02);
+}
 
-        .samples-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .sample-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            padding: 30px;
-            border-radius: 25px;
-            border: 1px solid var(--glass-border);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sample-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-            border-color: var(--electric-violet);
-        }
-
-        .sample-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .sample-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--electric-violet), var(--mint-green));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-        }
-
-        .sample-info h3 {
-            color: var(--mint-green);
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .sample-category {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        .sample-description {
-            color: #e0e0e0;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .audio-player {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .audio-player audio {
-            width: 100%;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-        }
-
-        .sample-duration {
-            text-align: center;
-            color: var(--electric-violet);
-            font-weight: 600;
-        }
+/* انتقال إظهار/إخفاء الفئة */
+.sample-card.hide {
+    pointer-events:none;
+    opacity:0;
+    transform:scale(.94) translateY(14px);
+    transition:
+        opacity .35s ease,
+        transform .45s cubic-bezier(.23,1,.32,1);
+}
 
         /* Trusted By Section with Scrolling Animation */
         .trusted-by {
@@ -965,17 +1245,17 @@
         .logo-item {
             flex-shrink: 0;
             width: 200px;
-            height: 120px;
+            height: 150px;
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
-            border-radius: 20px;
+            border-radius: 100px;
             border: 1px solid var(--glass-border);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            transition: all 0.6s ease;
+            transition: all 0.s ease;
         }
 
         .logo-item::before {
@@ -1044,6 +1324,45 @@
         }
 
         /* Client Feedback Section with Enhanced Scrolling Animation */
+
+
+      .scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: linear-gradient(to right, #00a2ff, #ee0979); /* vibrant gradient */
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.scroll-arrow:hover {
+    background: linear-gradient(to right, #ee0979, #ff6a00);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-arrow.left {
+    left: -10px;
+}
+
+.scroll-arrow.right {
+    right: -10px;
+}
+
+@media (max-width: 768px) {
+    .scroll-arrow {
+        font-size: 1.5rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
+
         .feedback {
             padding: 80px 0;
             background: linear-gradient(135deg, var(--carbon-blue) 0%, #1a1a2e 50%, #0f1419 100%);
@@ -1062,7 +1381,7 @@
                 radial-gradient(circle at 20% 80%, rgba(127, 90, 240, 0.15) 0%, transparent 60%),
                 radial-gradient(circle at 80% 20%, rgba(44, 182, 125, 0.15) 0%, transparent 60%),
                 radial-gradient(circle at 40% 40%, rgba(255, 137, 6, 0.08) 0%, transparent 50%);
-            animation: feedbackBackgroundFlow 12s ease-in-out infinite;
+            animation: feedbackBackgroundFlow 5s ease-in-out infinite;
             z-index: 1;
         }
 
@@ -1078,6 +1397,7 @@
         }
 
         .feedback-scroll-container {
+            width: max-content;
             overflow: hidden;
             margin-top: 50px;
             position: relative;
@@ -1088,12 +1408,12 @@
         .feedback-scroll-row {
             display: flex;
             gap: 30px;
-            animation: feedbackScrollRight 45s linear infinite;
+            animation: feedbackScrollRight 15s linear infinite;
             margin-bottom: 30px;
         }
 
-        .feedback-scroll-row:nth-child(2) {
-            animation: feedbackScrollLeft 50s linear infinite;
+        .feedback-scroll-row:nth-child(1) {
+            animation: feedbackScrollLeft 15s linear infinite;
         }
 
         .feedback-scroll-row:hover {
@@ -1102,17 +1422,17 @@
 
         @keyframes feedbackScrollRight {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(100%); }
         }
 
         @keyframes feedbackScrollLeft {
-            0% { transform: translateX(-50%); }
+            0% { transform: translateX(100%); }
             100% { transform: translateX(0); }
         }
 
         .feedback-card {
             flex-shrink: 0;
-            width: 400px;
+            width: 350px;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             padding: 35px;
@@ -1146,7 +1466,7 @@
             position: absolute;
             top: -2px;
             left: -2px;
-            right: -2px;
+            right: -50px;
             bottom: -2px;
             background: linear-gradient(45deg,
                 var(--electric-violet),
@@ -1187,7 +1507,7 @@
 
         .star {
             color: #ffd700;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
             animation: starTwinkle 3s ease-in-out infinite;
             animation-delay: calc(var(--star-index) * 0.2s);
@@ -1282,18 +1602,84 @@
             color: #ddd;
         }
 
+
+
+        .why-work-section {
+  background: #212631;
+  padding: 80px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  color: var(--mint-green, #14b8a6);
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.intro-paragraph {
+  text-align: center;
+  color: #333;
+  font-size: 1.3rem;
+  max-width: 900px;
+  margin: 0 auto 50px;
+  line-height: 2;
+  direction: rtl;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.about-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  font-size: 3rem;
+  color: #14b8a6;
+  margin-bottom: 15px;
+}
+
+.about-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #111;
+}
+
+.about-card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+
+
         /* About Section */
         .about {
-            padding: 80px 0;
-            background: var(--dark-gray);
+
+              padding: 80px 20px; /* إضافة padding جانبي */
+    background: var(--dark-gray);
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
+ .about-grid {
+    display: grid;
+    flex-wrap: wrap;
+    align-items: flex-start; /* هذه تجعل العناصر تبدأ من الأعلى */
+    gap: 40px;
+    margin-top: 60px;
+}
 
         .about-card {
             background: var(--glass-bg);
@@ -1301,7 +1687,7 @@
             padding: 40px 30px;
             border-radius: 20px;
             border: 1px solid var(--glass-border);
-            text-align: center;
+            text-align: start;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -1348,10 +1734,29 @@
             color: var(--mint-green);
         }
 
-        .about-card p {
+        /* .about-card p {
             color: #cccccc;
             line-height: 1.6;
-        }
+        } */
+        .about-section h2 {
+    color: #00c896;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.about-card  p{
+    color: #ddd;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+
+         #about img {
+         object-fit: cover;
+         border-radius: 12px;
+         max-width: 100%;
+         height: auto;
+         }
 
         /* Contact Info Section */
         .contact-info {
@@ -1886,11 +2291,11 @@
             }
 
             .feedback-scroll {
-                gap: 20px;
+                gap: 30px;
             }
 
             .feedback-card {
-                min-width: 300px;
+                min-width: 350px;
             }
 
             .samples-grid {
@@ -1898,9 +2303,7 @@
                 gap: 20px;
             }
 
-            .sample-filters {
-                gap: 10px;
-            }
+
 
             .filter-btn {
                 padding: 8px 16px;
@@ -1987,6 +2390,42 @@
             }
         }
 
+        /* تركيز لوحة المفاتيح */
+.filter-btn:focus-visible,
+.sample-card:focus-within {
+    outline:2px solid var(--electric-violet);
+    outline-offset:3px;
+}
+
+/* دعم RTL */
+html[dir="rtl"] .sample-header { direction:rtl; }
+html[dir="rtl"] .sample-duration { text-align:left; }
+html[dir="rtl"] .samples-grid.empty::before { direction:rtl; }
+html[dir="rtl"] .filter-btn { letter-spacing:0.4px; }
+
+/* استجابة الشاشات */
+@media (max-width:1100px){
+    .section-header h2 { font-size:2.35rem; }
+}
+@media (max-width:900px){
+    .sample-card { padding:24px 22px 22px; }
+    .sample-icon { width:54px; height:54px; font-size:1.25rem; }
+}
+@media (max-width:680px){
+    .section-header h2 { font-size:2.05rem; }
+    .filter-btn { padding:9px 18px; font-size:0.82rem; }
+    .sample-filters { gap:10px; padding:14px 14px; margin:26px auto 10px; }
+    .samples-grid { gap:22px; margin-top:34px; }
+}
+@media (max-width:480px){
+    .samples { padding:60px 0 75px; }
+    .filter-btn { padding:8px 16px; font-size:0.78rem; }
+    .sample-card { padding:22px 18px 18px; }
+    .sample-description { font-size:0.85rem; }
+    .sample-icon { width:50px; height:50px; }
+    .section-header p { font-size:0.95rem; }
+}
+
         /* Success Animation */
         .success-message {
             background: linear-gradient(135deg, var(--mint-green), #2ea86e);
@@ -2009,13 +2448,87 @@
                 opacity: 1;
             }
         }
+
+
+
+        @keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-links li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+/* Default hidden */
+.fade-link {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.nav-link {
+    position: relative;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #ff9500;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+/* Apply delay to each link */
+.nav-links li:nth-child(1) .fade-link { animation-delay: 0.2s; }
+.nav-links li:nth-child(2) .fade-link { animation-delay: 0.4s; }
+.nav-links li:nth-child(3) .fade-link { animation-delay: 0.6s; }
+.nav-links li:nth-child(4) .fade-link { animation-delay: 0.8s; }
+.nav-links li:nth-child(5) .fade-link { animation-delay: 1s; }
+.nav-links li:nth-child(6) .fade-link { animation-delay: 1.2s; }
+
+
+
+.logo img {
+    height: 160px;
+    width: 160px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+    transform: translateY(-50px) rotate(-10deg);
+}
+
+/* بعد تحميل الصفحة يظهر الشعار */
+.logo img.show {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+}
+
     </style>
 </head>
+
+
+
 <body>
     <!-- Flying Microphone -->
     <div class="flying-microphone">
         <i class="fas fa-microphone"></i>
     </div>
+
 
     <!-- Language Toggle -->
     <div class="language-toggle">
@@ -2027,27 +2540,33 @@
         </form>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">Hossam</div>
-                <ul class="nav-links">
-                    <li><a href="#home">{{ __('portfolio.nav.home') }}</a></li>
-                    <li><a href="#samples">{{ $locale === 'ar' ? 'عينات صوتية' : 'Voice Samples' }}</a></li>
-                    <li><a href="#about">{{ __('portfolio.nav.about') }}</a></li>
-                    <li><a href="#contact-info">{{ $locale === 'ar' ? 'تواصل معي' : 'Contact Info' }}</a></li>
-                    <li><a href="#feedback">{{ $locale === 'ar' ? 'آراء العملاء' : 'Feedback' }}</a></li>
-                    <li><a href="#contact">{{ __('portfolio.nav.contact') }}</a></li>
-                </ul>
-                <div class="mobile-menu-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+  <nav class="navbar">
+    <div class="container">
+        <div class="nav-content">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="{{ asset('images/hos-logo.png') }}" alt="Hossam Logo" style="height: 160px;width: 160px;" />
+            </div>
+
+            <!-- Links -->
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link"> {{ __('portfolio.nav.home') }} </a></li>
+                <li><a href="#samples" class="nav-link"> {{ $locale === 'ar' ? 'عينات صوتية' : 'Voice Samples' }} </a></li>
+                <li><a href="#about" class="nav-link"> {{ __('portfolio.nav.about') }} </a></li>
+                <li><a href="#contact-info" class="nav-link"> {{ $locale === 'ar' ? 'تواصل معي' : 'Contact Info' }} </a></li>
+                <li><a href="#feedback" class="nav-link"> {{ $locale === 'ar' ? 'آراء العملاء' : 'Feedback' }} </a></li>
+                <li><a href="#contact-me" class="nav-link"> {{ __('portfolio.nav.contact-me') }} </a></li>
+            </ul>
+
+            <!-- Mobile menu -->
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -2103,9 +2622,9 @@
         </div>
     </section>
 
-    <!-- Voice Samples Section -->
-  @php $locale = $locale ?? app()->getLocale(); @endphp
 
+
+@php $locale = $locale ?? app()->getLocale(); @endphp
 <section id="samples" class="samples">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
@@ -2114,121 +2633,67 @@
         </div>
 
         <!-- Sample Filters -->
-        <div class="sample-filters" data-aos="fade-up" data-aos-delay="100">
+        <div class="sample-filters" data-aos="fade-up" data-aos-delay="200">
             <button class="filter-btn active" data-filter="all">{{ $locale === 'ar' ? 'الكل' : 'All' }}</button>
-            <button class="filter-btn" data-filter="commercial">{{ $locale === 'ar' ? 'إعلانات' : 'Commercial' }}</button>
+            <button class="filter-btn" data-filter="commercial">{{ $locale === 'ar' ? 'إعلان' : 'Commercial' }}</button>
             <button class="filter-btn" data-filter="documentary">{{ $locale === 'ar' ? 'وثائقي' : 'Documentary' }}</button>
-            <button class="filter-btn" data-filter="character">{{ $locale === 'ar' ? 'شخصيات' : 'Character' }}</button>
+            <button class="filter-btn" data-filter="character">{{ $locale === 'ar' ? 'شخصية' : 'Character' }}</button>
             <button class="filter-btn" data-filter="narration">{{ $locale === 'ar' ? 'سرد' : 'Narration' }}</button>
             <button class="filter-btn" data-filter="educational">{{ $locale === 'ar' ? 'تعليمي' : 'Educational' }}</button>
+              <button class="filter-btn" data-filter="audiobook">{{ $locale === 'ar' ? 'كتب' : '
+audiobook' }}</button>
         </div>
 
+
+
+
         <div class="samples-grid" id="samplesGrid">
-            @if(isset($samples) && $samples->count() > 0)
-                @foreach($samples as $sample)
-                    <div class="sample-card" data-category="{{ strtolower($sample->category) }}" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div class="sample-header">
-                            <div class="sample-icon">
-                                <i class="fas fa-volume-up"></i>
-                            </div>
-                            <div class="sample-info">
-                                <h3>{{ $sample->getLocalizedTitle($locale) }}</h3>
-                                <p class="sample-category">{{ $sample->category }}</p>
-                            </div>
-                        </div>
-                        <p class="sample-description">{{ $sample->getLocalizedDescription($locale) }}</p>
-                        <div class="audio-player">
-                            <audio controls>
-                                <source src="{{ asset('storage/' . $sample->audio_file) }}" type="audio/mpeg">
-                                {{ $locale === 'ar' ? 'متصفحك لا يدعم تشغيل الملفات الصوتية' : 'Your browser does not support the audio element.' }}
-                            </audio>
-                        </div>
-                        <div class="sample-duration">{{ $sample->getFormattedDuration() }}</div>
-                    </div>
-                @endforeach
-            @else
-                <!-- Demo samples with categories -->
-                <div class="sample-card" data-category="commercial" data-aos="fade-up">
-                    <div class="sample-header">
-                        <div class="sample-icon">
-                            <i class="fas fa-microphone"></i>
-                        </div>
-                        <div class="sample-info">
-                            <h3>{{ $locale === 'ar' ? 'إعلان تجاري للمطاعم' : 'Restaurant Commercial' }}</h3>
-                            <p class="sample-category">{{ $locale === 'ar' ? 'إعلان' : 'Commercial' }}</p>
-                        </div>
-                    </div>
-                    <p class="sample-description">{{ $locale === 'ar' ? 'نموذج لتعليق صوتي احترافي لإعلان مطعم' : 'Professional voice-over sample for restaurant advertisement' }}</p>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="#" type="audio/mpeg">
-                            {{ $locale === 'ar' ? 'سيتم إضافة العينات قريباً' : 'Samples will be added soon' }}
-                        </audio>
-                    </div>
-                    <div class="sample-duration">0:30</div>
-                </div>
+            @foreach($samples as $index => $sample)
 
-                <div class="sample-card" data-category="documentary" data-aos="fade-up" data-aos-delay="100">
+                                @php
+    $token = hash_hmac('sha256', $sample->id . '|' . $sample->audio_file, config('app.key'));
+@endphp
+                <div class="sample-card" data-category="{{ strtolower($sample->category) }}" data-aos="fade-up" data-aos-delay="{{ ($index * 100) + 300 }}">
                     <div class="sample-header">
                         <div class="sample-icon">
-                            <i class="fas fa-film"></i>
+                            @switch(strtolower($sample->category))
+                                @case('commercial')
+                                    <i class="fas fa-bullhorn"></i>
+                                    @break
+                                @case('documentary')
+                                    <i class="fas fa-film"></i>
+                                    @break
+                                @case('character')
+                                    <i class="fas fa-theater-masks"></i>
+                                    @break
+                                @case('narration')
+                                    <i class="fas fa-book-open"></i>
+                                    @break
+                                @case('educational')
+                                    <i class="fas fa-graduation-cap"></i>
+                                    @break
+                                @default
+                                    <i class="fas fa-microphone"></i>
+                            @endswitch
                         </div>
                         <div class="sample-info">
-                            <h3>{{ $locale === 'ar' ? 'فيلم وثائقي' : 'Documentary Narration' }}</h3>
-                            <p class="sample-category">{{ $locale === 'ar' ? 'وثائقي' : 'Documentary' }}</p>
+                            <h3>{{ $locale === 'ar' ? $sample->title_ar : $sample->title_en }}</h3>
+                            <p class="sample-category">{{ $sample->category }}</p>
                         </div>
                     </div>
-                    <p class="sample-description">{{ $locale === 'ar' ? 'تعليق صوتي لفيلم وثائقي تاريخي' : 'Voice-over for historical documentary' }}</p>
+                  <p class="sample-description">
+    {{ $locale === 'ar' ? ($sample->description_ar ?? 'لا يوجد وصف') : ($sample->description ?? 'No description available') }}
+</p>
                     <div class="audio-player">
-                        <audio controls>
-                            <source src="#" type="audio/mpeg">
-                            {{ $locale === 'ar' ? 'سيتم إضافة العينات قريباً' : 'Samples will be added soon' }}
-                        </audio>
-                    </div>
-                    <div class="sample-duration">1:45</div>
-                </div>
 
-                <div class="sample-card" data-category="character" data-aos="fade-up" data-aos-delay="200">
-                    <div class="sample-header">
-                        <div class="sample-icon">
-                            <i class="fas fa-theater-masks"></i>
-                        </div>
-                        <div class="sample-info">
-                            <h3>{{ $locale === 'ar' ? 'أداء شخصية كرتونية' : 'Cartoon Character Voice' }}</h3>
-                            <p class="sample-category">{{ $locale === 'ar' ? 'شخصيات' : 'Character' }}</p>
-                        </div>
+<audio controls preload="metadata">
+  <source src="{{ route('samples.play', ['id' => $sample->id, 'token' => $token]) }}" type="audio/mpeg">
+  متصفحك لا يدعم تشغيل الصوت.
+</audio>
                     </div>
-                    <p class="sample-description">{{ $locale === 'ar' ? 'أداء صوتي لشخصية كرتونية للأطفال' : 'Voice acting for children\'s cartoon character' }}</p>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="#" type="audio/mpeg">
-                            {{ $locale === 'ar' ? 'سيتم إضافة العينات قريباً' : 'Samples will be added soon' }}
-                        </audio>
-                    </div>
-                    <div class="sample-duration">0:45</div>
+                    <div class="sample-duration">{{ $sample->duration }}</div>
                 </div>
-
-                <!-- مثال إضافي بعد  -->
-                <div class="sample-card" data-aos="fade-up">
-                    <div class="sample-header">
-                        <div class="sample-icon">
-                            <i class="fas fa-microphone"></i>
-                        </div>
-                        <div class="sample-info">
-                            <h3>{{ $locale === 'ar' ? 'إعلان تجاري' : 'Commercial Advertisement' }}</h3>
-                            <p class="sample-category">{{ $locale === 'ar' ? 'إعلان' : 'Advertisement' }}</p>
-                        </div>
-                    </div>
-                    <p class="sample-description">{{ $locale === 'ar' ? 'نموذج لتعليق صوتي احترافي لإعلان تجاري' : 'Professional voice-over sample for commercial advertisement' }}</p>
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="#" type="audio/mpeg">
-                            {{ $locale === 'ar' ? 'سيتم إضافة العينات قريباً' : 'Samples will be added soon' }}
-                        </audio>
-                    </div>
-                    <div class="sample-duration">0:30</div>
-                </div>
-            @endif
+            @endforeach
         </div>
     </div>
 </section>
@@ -2339,50 +2804,87 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>{{ __('portfolio.about.title') }}</h2>
-                <p>{{ __('portfolio.about.description') }}</p>
+
+
+
+<section id="about" class="about">
+    <div class="container">
+        <div class="about-grid" style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem;">
+            <!-- النص على اليسار -->
+            <div class="fade-right" style="flex: 1; min-width: 300px;">
+                <h2 style="color: var(--mint-green); font-size: 2.5rem; margin-bottom: 20px;">
+                    {{ __('portfolio.about.title') }}
+                </h2>
+                <p style="color: #ccc; line-height: 1.8; font-size: 1.1rem;">
+                    {{ __('portfolio.about.description') }}
+                </p>
             </div>
-            <div class="about-grid">
-                <div class="about-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3>{{ __('portfolio.about.multilingual.title') }}</h3>
-                    <p>{{ __('portfolio.about.multilingual.description') }}</p>
-                </div>
-                <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>{{ __('portfolio.about.ai_enhanced.title') }}</h3>
-                    <p>{{ __('portfolio.about.ai_enhanced.description') }}</p>
-                </div>
-                <div class="about-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3>{{ __('portfolio.about.professional.title') }}</h3>
-                    <p>{{ __('portfolio.about.professional.description') }}</p>
-                </div>
+
+            <!-- الصورة على اليمين -->
+            <div class="fade-left" style="flex: 1; min-width: 300px; text-align: center;">
+                <img src="{{ asset('images/Hossam (2).png') }}" alt="Hossam Image" style="max-width: 100%; height: auto;">
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Client Feedback Section with Enhanced Client Images -->
-    <section id="feedback" class="feedback">
+
+
+
+<section class="why-work-section" id="why_work">
+  <div class="container">
+    <h2 class="section-title">{{ __('portfolio.why_work.title') }}</h2>
+
+    <div class="about-grid">
+  @foreach(trans('portfolio.why_work.items') as $item)
+    <div class="about-card">
+        <div class="card-icon"><i class="{{ $item['icon'] }}"></i></div>
+        <h3>{{ $item['title'] }}</h3>
+        <p>{{ $item['desc'] }}</p>
+    </div>
+@endforeach
+    </div>
+  </div>
+</section>
+
+
+<section class="about" id="portfolio">
     <div class="container">
+        <h2 style="color: var(--mint-green); font-size: 2.5rem; text-align: center; margin-bottom: 40px;">
+            <?= __('portfolio.title') ?>
+        </h2>
+        <div class="about-grid">
+            <?php foreach(__('portfolio.projects') as $project): ?>
+                <div class="about-card">
+                    <a href="<?= $project['link'] ?>" target="_blank">
+                        <img src="https://img.youtube.com/vi/<?= $project['thumb'] ?>/hqdefault.jpg"
+                             alt="YouTube Thumbnail"
+                             style="width: 100%; border-radius: 12px; margin-bottom: 16px;">
+                    </a>
+                    <h3><?= $project['title'] ?></h3>
+                    <p><?= $project['desc'] ?></p>
+                    <a href="<?= $project['link'] ?>" target="_blank" style="color: var(--mint-green); font-weight: bold;">
+                        <?= __('portfolio.watch_now') ?>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Client Feedback Section -->
+<section id="feedback" class="feedback">
+    <div class="container">
+        <!-- Section Header -->
         <div class="section-header" data-aos="fade-up">
             <h2>{{ $locale === 'ar' ? 'آراء العملاء' : 'Client Feedback' }}</h2>
             <p>{{ $locale === 'ar' ? 'اكتشف ماذا قال عملائي عن خدماتي في التعليق الصوتي' : 'Discover what my clients said about my voice-over services' }}</p>
         </div>
-        <div class="feedback-container">
-            <div class="feedback-scroll-container">
-                <div class="feedback-scroll-row">
 
+        <!-- Scrollable Feedback -->
+        <div class="feedback-scroll-wrapper">
+            <div class="feedback-scroll-container" id="feedbackScroll">
+                <div class="feedback-scroll-row">
                     @php
                         $feedbacks = [
                             [
@@ -2390,7 +2892,7 @@
                                 'text_en' => 'MashaAllah, thank you Hossam. You’re truly professional and skilled. Not the first time I work with you and certainly not the last.',
                                 'name' => 'Younes',
                                 'title' => 'Magic Intro',
-                                'image' => 'clients/younes.png'
+                                'image' => 'clients/hicats.png'
                             ],
                             [
                                 'text_ar' => 'التعامل كان مريح جدًا والفويس أوفر ممتاز، ما احتاج تعديلات. يعطيك العافية حسام.',
@@ -2426,7 +2928,7 @@
                                 'name' => 'Hind Marmash',
                                 'title' => 'Media Plus Company',
                                 'image' => 'clients/hind.png'
-                            ]
+                            ],
                         ];
                     @endphp
 
@@ -2451,12 +2953,40 @@
                             </div>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+.feedback-scroll-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.feedback-scroll-row {
+    display: flex;
+    gap: 20px;
+    animation: scroll-left 40s linear infinite;
+}
+
+.feedback-card {
+    min-width: 300px;
+    background: #1e1e1e;
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* يمر كل الكروت ويرجع */
+}
+</style>
+
 
     <!-- Contact Info Section -->
     <section id="contact-info" class="contact-info">
@@ -2490,14 +3020,8 @@
                     <p><a href="https://wa.me/972595359631">+972 595 359 631</a></p>
                     <p>{{ $locale === 'ar' ? 'متاح 24/7 للاستشارات' : 'Available 24/7 for consultations' }}</p>
                 </div>
-                {{-- <div class="contact-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="contact-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
-                    <h3>{{ $locale === 'ar' ? 'لينكدإن' : 'LinkedIn' }}</h3>
-                    <p><a href="https://linkedin.com/in/hicatssam" target="_blank">linkedin.com/in/hicatssam</a></p>
-                    <p>{{ $locale === 'ar' ? 'شبكة مهنية' : 'Professional Network' }}</p>
-                </div> --}}
+
+
                 <div class="contact-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="contact-icon">
                         <i class="fab fa-telegram"></i>
@@ -2506,7 +3030,27 @@
                     <p><a href="https://t.me/hossamamriti">@hossamvoiceover</a></p>
                     <p>{{ $locale === 'ar' ? 'تواصل سريع ومباشر' : 'Quick and direct communication' }}</p>
                 </div>
-                <div class="contact-card" data-aos="fade-up" data-aos-delay="600">
+
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="contact-icon">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <h3>{{ $locale === 'ar' ? 'فيس بوك' : 'Facebook' }}</h3>
+                    <p><a href="https://www.facebook.com/profile.php?id=61565398037604">Hossam Voice Over</a></p>
+                    <p>{{ $locale === 'ar' ? 'تواصل سريع ومباشر' : 'Quick and direct communication' }}</p>
+                </div>
+
+                   <div class="contact-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>{{ $locale === 'ar' ? 'انستغرام' : 'Instagram' }}</h3>
+                    <p><a href="https://www.instagram.com/hossamalamriti/">Hossam voice over</a></p>
+                    <p>{{ $locale === 'ar' ? 'تواصل سريع ومباشر' : 'Quick and direct communication' }}</p>
+                </div>
+            </div>
+
+             {{-- <div class="contact-card" data-aos="fade-up" data-aos-delay="600">
                     <div class="contact-icon">
                         <i class="fas fa-clock"></i>
                     </div>
@@ -2514,18 +3058,23 @@
                     <p>{{ $locale === 'ar' ? 'السبت - الخميس: 9:00 - 5:00 ' : 'Satuarday - Thursday: 9:00 - 5:00' }}</p>
                     <p>{{ $locale === 'ar' ? 'طوارئ: متاح في أي وقت' : 'Emergency: Available anytime' }}</p>
                 </div>
-            </div>
+            </div> --}}
+
         </div>
     </section>
 
+
+
     <!-- Contact Form Section -->
-    <section id="contact" class="contact">
+    <section id="contact-me" class="contact">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <h2>{{ __('portfolio.contact.title') }}</h2>
                 <p>{{ __('portfolio.contact.description') }}</p>
             </div>
             <div class="contact-form" data-aos="fade-up" data-aos-delay="200">
+                <div id="messageAlert" style="display:none; margin-bottom: 1rem;"></div>
+
                 <form id="contactForm" method="POST" action="{{ route('portfolio.contact') }}">
                     @csrf
                     <div class="form-group">
@@ -2561,15 +3110,20 @@
         </div>
     </section>
 
+
+
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Background Audio -->
     <audio id="backgroundAudio" loop preload="auto">
-        <source src="{{ asset('storage/background-music.mp3') }}" type="audio/mpeg">
-        <source src="{{ asset('storage/background-music.wav') }}" type="audio/wav">
+        <source src="{{ asset('sounds/background-music.mp3') }}" type="audio/mpeg">
+        <source src="{{ asset('sounds/background-music.wav') }}" type="audio/wav">
         <!-- Fallback audio files - you can upload your own background music -->
     </audio>
+
+    <audio id="notificationSound" src="{{ asset('sounds/notification.mp3') }}" preload="auto"></audio>
+
 
     <!-- Audio Control Button -->
     <div id="audioControl" class="audio-control">
@@ -2580,6 +3134,29 @@
 
     <!-- Custom JavaScript -->
     <script>
+
+
+         const reveals = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+        for (let i = 0; i < reveals.length; i++) {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveals[i].getBoundingClientRect().top;
+            const elementVisible = 100;
+
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            } else {
+                reveals[i].classList.remove("active");
+            }
+        }
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+
+
+
         // Initialize AOS
         AOS.init({
             duration: 800,
@@ -2622,84 +3199,83 @@
             }, { once: true });
         }
 
-        // Enhanced sample filtering functionality
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const sampleCards = document.querySelectorAll('.sample-card');
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const filter = this.dataset.filter;
-
-                // Update active button with animation
-                filterButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    btn.style.transform = 'scale(1)';
-                });
-                this.classList.add('active');
-                this.style.transform = 'scale(1.1)';
-
-                // Create ripple effect
-                const ripple = document.createElement('div');
-                ripple.style.cssText = `
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 0;
-                    height: 0;
-                    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
-                    border-radius: 50%;
-                    transform: translate(-50%, -50%);
-                    pointer-events: none;
-                    z-index: 10;
-                    animation: filterRipple 0.6s ease-out forwards;
-                `;
-                this.appendChild(ripple);
-
-                setTimeout(() => ripple.remove(), 600);
-
-                // Filter samples with staggered animation
-                sampleCards.forEach((card, index) => {
-                    const category = card.dataset.category || 'all';
-
-                    if (filter === 'all' || category === filter) {
-                        card.style.display = 'block';
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(30px) scale(0.9)';
-
-                        setTimeout(() => {
-                            card.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0) scale(1)';
-                        }, index * 100);
-                    } else {
-                        card.style.transition = 'all 0.4s ease-out';
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(-20px) scale(0.8)';
-
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 400);
-                    }
-                });
-            });
-        });
-
-        // Add filter ripple animation
-        const filterStyle = document.createElement('style');
-        filterStyle.textContent = `
-            @keyframes filterRipple {
-                to {
-                    width: 100px;
-                    height: 100px;
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(filterStyle);
 
         // Audio sample management
         document.addEventListener('DOMContentLoaded', function() {
             const audioElements = document.querySelectorAll('.sample-card audio');
+
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const sampleCards = document.querySelectorAll('.sample-card');
+
+            console.log('Found filter buttons:', filterButtons.length);
+            console.log('Found sample cards:', sampleCards.length);
+
+            if (filterButtons.length === 0) {
+                console.error('No filter buttons found!');
+                return;
+            }
+
+            if (sampleCards.length === 0) {
+                console.error('No sample cards found!');
+                return;
+            }
+
+            // Log all sample categories for debugging
+            sampleCards.forEach((card, index) => {
+                console.log(`Sample ${index}: category="${card.dataset.category}"`);
+            });
+
+            filterButtons.forEach((button, buttonIndex) => {
+                console.log(`Setting up button ${buttonIndex}: ${button.dataset.filter}`);
+
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const filter = this.dataset.filter;
+                    console.log('Filter clicked:', filter);
+
+                    // Update active button with enhanced animation
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+
+                    // Filter samples with staggered animation
+                    let visibleIndex = 0;
+                    sampleCards.forEach((card, index) => {
+                        const category = card.dataset.category;
+                        console.log(`Card ${index}: category="${category}", filter="${filter}"`);
+
+                        if (filter === 'all' || category === filter) {
+                            // Show card with staggered animation
+                            card.style.display = 'block';
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(50px) scale(0.8)';
+
+                            setTimeout(() => {
+                                card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0) scale(1)';
+                            }, visibleIndex * 150);
+
+                            visibleIndex++;
+                        } else {
+                            // Hide card with fade-out animation
+                            card.style.transition = 'all 0.5s ease-out';
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(-30px) scale(0.7)';
+
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 500);
+                        }
+                    });
+
+                    console.log(`Showing ${visibleIndex} cards for filter: ${filter}`);
+                });
+            });
+
+            console.log('Enhanced filter functionality initialized successfully!');
 
             audioElements.forEach(audio => {
                 audio.addEventListener('play', function() {
@@ -2782,64 +3358,54 @@
         });
 
         // Contact form submission with enhanced feedback
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
 
-            const form = this;
-            const submitBtn = form.querySelector('.btn-submit');
-            const messageAlert = document.getElementById('messageAlert');
-            const originalText = submitBtn.innerHTML;
+       document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-            // Show loading state
-            submitBtn.innerHTML = '{{ $locale === "ar" ? "جاري الإرسال..." : "Sending..." }}';
-            submitBtn.disabled = true;
+    const form = this;
+    const submitBtn = form.querySelector('.btn-submit');
+    const messageAlert = document.getElementById('messageAlert');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '{{ $locale === "ar" ? "جاري الإرسال..." : "Sending..." }}';
+    submitBtn.disabled = true;
 
-            // Create FormData
-            const formData = new FormData(form);
+    fetch('{{ route("portfolio.contact") }}', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        messageAlert.style.display = 'block';
+        if(data.success){
+            messageAlert.className = 'success-message';
+            messageAlert.innerHTML = data.message;
+            form.reset();
+        } else {
+            messageAlert.className = 'error-message';
+            messageAlert.innerHTML = data.message;
+        }
+        setTimeout(() => messageAlert.style.display = 'none', 5000);
+         notificationSound.play();
+    })
 
-            // Send AJAX request
-            fetch('{{ route("portfolio.contact") }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    messageAlert.innerHTML = data.message;
-                    messageAlert.className = 'success-message';
-                    messageAlert.style.display = 'block';
-                    form.reset();
-                } else {
-                    messageAlert.innerHTML = data.message;
-                    messageAlert.className = 'error-message';
-                    messageAlert.style.display = 'block';
-                }
 
-                // Hide message after 5 seconds
-                setTimeout(() => {
-                    messageAlert.style.display = 'none';
-                }, 5000);
-            })
-            .catch(error => {
-                messageAlert.innerHTML = '{{ $locale === "ar" ? "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى." : "An unexpected error occurred. Please try again." }}';
-                messageAlert.className = 'error-message';
-                messageAlert.style.display = 'block';
+    .catch(() => {
+        messageAlert.style.display = 'block';
+        messageAlert.className = 'error-message';
+        messageAlert.innerHTML = '{{ $locale === "ar" ? "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى." : "An unexpected error occurred. Please try again." }}';
+        setTimeout(() => messageAlert.style.display = 'none', 5000);
+    })
+    .finally(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
 
-                setTimeout(() => {
-                    messageAlert.style.display = 'none';
-                }, 5000);
-            })
-            .finally(() => {
-                // Reset button state
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
-        });
 
+});
 
         // Add parallax effect to floating elements
         window.addEventListener('scroll', function() {
@@ -2923,7 +3489,7 @@
                     transform: translate(-50%, -50%);
                     pointer-events: none;
                     z-index: 10;
-                    animation: clickRipple 0.5s ease-out forwards;
+                    animation: clickRipple 0.10s ease-out forwards;
                 `;
 
                 this.appendChild(clickEffect);
@@ -2935,17 +3501,39 @@
         });
 
         // Click ripple effect
-        const clickStyle = document.createElement('style');
-        clickStyle.textContent = `
-            @keyframes clickRipple {
-                to {
-                    width: 100px;
-                    height: 100px;
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(clickStyle);
+      const clickStyle = document.createElement('style');
+clickStyle.textContent = `
+    @keyframes clickRipple {
+        to {
+            width: 100px;
+            height: 100px;
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(clickStyle);
+
+
+
+
+     function scrollFeedback(direction) {
+        const container = document.querySelector('.feedback-scroll-container');
+        const scrollAmount = 320;
+
+        if (direction === 'left') {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

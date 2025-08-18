@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<!-- Animate.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
         :root {
             --primary-color: #667eea;
@@ -590,6 +597,8 @@
             animation: slideInRight 0.5s ease;
         }
 
+
+
         @keyframes slideInRight {
             from {
                 opacity: 0;
@@ -718,6 +727,26 @@
                 box-shadow: 0 8px 25px rgba(255, 0, 122, 0.6);
             }
         }
+
+
+        .icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #ff6b6b, #f8e71c, #50e3c2);
+    border-radius: 15px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.6);
+    }
+    50% {
+      transform: translateY(-15px);
+      box-shadow: 0 15px 25px rgba(255, 107, 107, 0.8);
+    }
+  }
     </style>
 </head>
 <body>
@@ -725,7 +754,7 @@
 
     <div class="container-fluid">
         <!-- Header Section -->
-        <div class="header-section" data-aos="fade-down">
+        <div class="header-section" >
             <h1 class="header-title">
                 <span class="floating-icon">
                     <i class="fas fa-microphone"></i>
@@ -736,80 +765,98 @@
                 <i class="fas fa-plus"></i>
                 Add New Sample
             </button>
+
+            <!-- تأكد أنك تستخدم Tailwind و Animate.css أو أضفها -->
+<a href="{{ route('logout') }}"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+   class="flex items-center gap-2 px-4 py-2 rounded-xl text-white bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg animate-bounce hover:animate-none"
+>
+    <!-- أيقونة تسجيل الخروج -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-1V7m0 0V6" />
+    </svg>
+    <span class="font-bold">تسجيل الخروج</span>
+</a>
+
+<!-- فورم تسجيل الخروج -->
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+    @csrf
+</form>
         </div>
-
-        <!-- Success/Error Messages -->
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert" data-aos="slide-right">
-                <i class="fas fa-check-circle me-2"></i>
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-        <!-- Samples Grid -->
-        <div class="samples-grid" id="samplesGrid">
-            @forelse($samples as $sample)
-                <div class="sample-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="sample-header">
-                        <div>
-                            <h3 class="sample-title">{{ $sample->title }}</h3>
-                            <div class="sample-category">{{ $sample->category }}</div>
-                        </div>
-                        <div class="sample-actions">
-                            <button class="action-btn edit" onclick="openEditModal({{ $sample->id }})" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="action-btn delete" onclick="deleteSample({{ $sample->id }})" title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <p class="sample-description">{{ $sample->description }}</p>
-
-                    <div class="audio-player-container">
-                        <div class="custom-audio-player">
-                            <div class="audio-controls">
-                                <button class="play-pause-btn action-btn play" onclick="toggleAudio({{ $sample->id }})" title="Play/Pause">
-                                    <i class="fas fa-play" id="playIcon{{ $sample->id }}"></i>
-                                </button>
-                                <div class="time-display" id="timeDisplay{{ $sample->id }}">0:00 / {{ $sample->getFormattedDuration() }}</div>
-                                <div class="seekbar-container">
-                                    <input type="range" class="seekbar" id="seekbar{{ $sample->id }}" min="0" max="100" value="0" onchange="seekAudio({{ $sample->id }}, this.value)">
-                                    <div class="progress-bar" id="progressBar{{ $sample->id }}"></div>
-                                </div>
-                            </div>
-                            <div class="waveform-visualization" id="waveform{{ $sample->id }}">
-                                <div class="wave-bars">
-                                    @for($i = 0; $i < 30; $i++)
-                                        <div class="wave-bar" style="height: {{ rand(10, 35) }}px; animation-delay: {{ $i * 0.05 }}s;"></div>
-                                    @endfor
-                                </div>
-                            </div>
-                        </div>
-                        <audio id="audio{{ $sample->id }}" preload="metadata">
-                            <source src="{{ asset('storage/' . $sample->audio_file) }}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                </div>
-            @empty
-                <div class="empty-state" data-aos="fade-in">
-                    <i class="fas fa-microphone-alt-slash"></i>
-                    <h3>No samples found</h3>
-                    <p>Get started by adding your first voice sample!</p>
-                </div>
-            @endforelse
-        </div>
-
-        <!-- Loading Spinner -->
-        <div class="loading-spinner" id="loadingSpinner">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
+<!-- Success/Error Messages -->
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert" data-aos="slide-right">
+        <i class="fas fa-check-circle me-2"></i>
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
+@endif
+
+<!-- Samples Grid -->
+<div class="samples-grid" id="samplesGrid">
+    @forelse($samples as $sample)
+        <div class="sample-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+            <div class="sample-header">
+                <div>
+                    <h3 class="sample-title">{{ $sample->title }}</h3>
+                    <div class="sample-category">{{ $sample->category }}</div>
+                </div>
+                <div class="sample-actions">
+                    <button class="action-btn edit" onclick="openEditModal({{ $sample->id }})" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="action-btn delete" onclick="deleteSample({{ $sample->id }})" title="Delete">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+
+            <p class="sample-description">{{ $sample->description }}</p>
+
+            <!-- Audio Player -->
+            <div class="audio-player-container">
+                <div class="custom-audio-player">
+                    <div class="audio-controls">
+                        <button class="play-pause-btn action-btn play" onclick="toggleAudio({{ $sample->id }})" title="Play/Pause">
+                            <i class="fas fa-play" id="playIcon{{ $sample->id }}"></i>
+                        </button>
+                        <div class="time-display" id="timeDisplay{{ $sample->id }}">
+                            0:00 / {{ $sample->getFormattedDuration() }}
+                        </div>
+                        <div class="seekbar-container">
+                            <input type="range" class="seekbar" id="seekbar{{ $sample->id }}" min="0" max="100" value="0"
+                                   onchange="seekAudio({{ $sample->id }}, this.value)">
+                            <div class="progress-bar" id="progressBar{{ $sample->id }}"></div>
+                        </div>
+                    </div>
+                    <div class="waveform-visualization" id="waveform{{ $sample->id }}">
+                        <div class="wave-bars">
+                            @for($i = 0; $i < 30; $i++)
+                                <div class="wave-bar"
+                                     style="height: {{ rand(10, 35) }}px; animation-delay: {{ $i * 0.05 }}s;"></div>
+                            @endfor
+                        </div>
+                    </div>
+                    <audio id="audio{{ $sample->id }}" src="{{ route('samples.play', $sample->id) }}"></audio>
+                </div>
+            </div>
+        </div>
+    @empty
+        <div class="empty-state" data-aos="fade-in">
+            <i class="fas fa-microphone-alt-slash"></i>
+            <h3>No samples found</h3>
+            <p>Get started by adding your first voice sample!</p>
+        </div>
+    @endforelse
+</div>
+
+<!-- Loading Spinner -->
+<div class="loading-spinner" id="loadingSpinner">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
     <!-- Sample Modal (Add/Edit) -->
     <div class="modal fade" id="sampleModal" tabindex="-1">
@@ -878,7 +925,7 @@
                                 <div class="mb-3">
                                     <label for="audio_file" class="form-label">Audio File</label>
                                     <input type="file" class="form-control" id="audio_file" name="audio_file" accept="audio/*">
-                                    <small class="text-muted">Supported formats: MP3, WAV, M4A (max 10MB)</small>
+                                    <small class="text-muted">Supported formats: MP3, WAV, M4A (max 20MB)</small>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -916,13 +963,14 @@
         <i class="fas fa-arrow-left"></i>
     </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+
+
     <script>
         // Initialize AOS
         AOS.init({
             duration: 800,
-            easing: 'ease-out',
+            easing: 'ase-out',
             once: true
         });
 
@@ -972,7 +1020,7 @@
 
         // Enhanced Toggle Audio with Progress
         function toggleAudio(sampleId) {
-            const audio = document.getElementById(`audio${sampleId}`);
+            conste audio = document.getElementById(`audio${sampleId}`);
             const playIcon = document.getElementById(`playIcon${sampleId}`);
             const timeDisplay = document.getElementById(`timeDisplay${sampleId}`);
             const seekbar = document.getElementById(`seekbar${sampleId}`);
@@ -997,7 +1045,6 @@
                 playIcon.classList.add('fa-pause');
                 waveform.classList.add('playing');
                 sampleCard.classList.add('playing');
-
                 currentAudio = audio;
                 currentPlayIcon = playIcon;
                 currentSampleId = sampleId;

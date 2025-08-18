@@ -7,7 +7,8 @@ return [
         'samples' => 'Voice Samples',
         'services' => 'Services',
         'gallery' => 'Gallery',
-        'contact' => 'Contact',
+        'contact-info' => 'contact info',
+        'contact-me' => 'contact me',
     ],
 
     'hero' => [
@@ -19,19 +20,47 @@ return [
     ],
 
     'about' => [
-        'title' => 'About Hossam',
-        'description' => 'Professional voice-over artist specializing in commercial narration, documentary work, and AI-enhanced projects',
-        'multilingual' => [
-            'title' => 'Multilingual Expertise',
-            'description' => 'Fluent in Arabic (Gulf dialects), English, and French. Perfect for regional and international projects.',
-        ],
-        'ai_enhanced' => [
-            'title' => 'AI-Enhanced Production',
-            'description' => 'Combining traditional voice-over techniques with cutting-edge AI tools for superior audio quality.',
-        ],
-        'professional' => [
-            'title' => 'Professional Excellence',
-            'description' => '10+ years experience with major brands, documentaries, and character voice work.',
+    'title' => 'About Hossam',
+    'description' => 'Hossam Al-Omariyti is a professional voice-over artist with over 5 years of experience in the industry. He possesses a warm, clear, and dynamic voice capable of conveying messages with deep emotion and professionalism. Hossam has collaborated with numerous media, educational, and commercial institutions across the Arab world and Gulf region, providing voice-over services for commercials, documentaries, e-learning, audiobooks, and IVR systems.
+
+Hossam is highly versatile in performing various Arabic dialects including Modern Standard Arabic, Palestinian, Gulf, and Jordanian accents, enabling him to reach a broad and diverse audience. He pays great attention to the finest vocal details and uses state-of-the-art recording technology to ensure superior sound quality that perfectly serves the project’s goals.
+
+Driven by passion and commitment, Hossam aims to deliver a unique auditory experience that enhances brand value and enriches media content. He is the reliable voice you can count on to make your message powerful and clear.',
+    ],
+
+    'why_work' => [
+        'title' => 'Why Work With Me',
+        'items' => [
+            [
+                'icon' => 'fas fa-microphone',
+                'title' => 'Professional Voice',
+                'desc' => 'Energetic, inspiring, and expressive voice that brings your project to life.',
+            ],
+            [
+                'icon' => 'fas fa-globe',
+                'title' => 'Arabic & Dialects',
+                'desc' => 'Classical Arabic, Gulf dialect, Palestinian, and Jordanian accents.',
+            ],
+            [
+                'icon' => 'fas fa-award',
+                'title' => 'Years of Experience',
+                'desc' => 'Worked with top institutions in Saudi Arabia, UAE, Oman, and Palestine.',
+            ],
+            [
+                'icon' => 'fas fa-laptop-code',
+                'title' => 'Versatile Styles',
+                'desc' => 'Commercials, documentaries, IVR systems, e-learning, audiobooks, and more.',
+            ],
+            [
+                'icon' => 'fas fa-user-check',
+                'title' => 'Client Focused',
+                'desc' => 'Every project is treated with care, passion, and full commitment.',
+            ],
+            [
+                'icon' => 'fas fa-lightbulb',
+                'title' => 'Creative Energy',
+                'desc' => 'Your ideas meet a voice that truly connects with listeners.',
+            ],
         ],
     ],
 
@@ -105,4 +134,27 @@ return [
             'other' => 'Other',
         ],
     ],
+
+    'title' => 'My Portfolio',
+    'projects' => [
+        [
+            'title' => 'Project 1',
+            'desc' => 'Voice-over project for a brand intro',
+            'link' => 'https://youtu.be/IFYDP_jtzFU?si=DKOYtEqc_jY_tl1R',
+            'thumb' => 'IFYDP_jtzFU',
+        ],
+        [
+            'title' => 'Project 2',
+            'desc' => 'Commercial voice-over for Oman SME Authority',
+            'link' => 'https://youtu.be/XlmurRIf38M?si=EECF_2gC8WAxP7Gr',
+            'thumb' => 'XlmurRIf38M',
+        ],
+        [
+            'title' => 'Project 3',
+            'desc' => 'Emotional voice-over with strong storytelling',
+            'link' => 'https://youtu.be/92TPdH6C7q8?si=oFNhLXjE8cK2PZc8',
+            'thumb' => '92TPdH6C7q8',
+        ],
+    ],
+    'watch_now' => 'Watch Now',
 ];

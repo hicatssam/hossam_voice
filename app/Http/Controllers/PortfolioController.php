@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -15,10 +16,7 @@ class PortfolioController extends Controller
         App::setLocale($locale);
 
         // Get featured samples for the portfolio
-        $samples = \App\Models\Sample::where('is_featured', true)
-            ->orderBy('order')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $samples = Sample::orderBy('order')->orderBy('created_at', 'desc')->get();
 
         return view('portfolio.index', compact('locale', 'samples'));
     }
