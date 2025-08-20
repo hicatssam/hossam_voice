@@ -24,45 +24,72 @@
 
     <!-- Custom CSS -->
     <style>
+.feedback-scroll-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem 0;
+}
 
+.feedback-scroll-container {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0 2.5rem; /* space for buttons */
+}
 
+.feedback-card {
+    flex: 0 0 auto;
+    width: 280px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 1rem;
+}
 
+.feedback-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
-    .feedback-scroll-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        margin-top: 2rem;
-    }
+.stars {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
 
-    .feedback-scroll-container {
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        display: flex;
-        flex-wrap: nowrap;
-        width: 100%;
-    }
+/* Scroll Buttons */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #1E90FF, #00BFFF);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 100;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+}
 
-    .feedback-scroll-row {
-        display: flex;
-        gap: 1.5rem;
-        padding: 1rem 0;
-    }
+.scroll-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg, #00BFFF, #1E90FF);
+}
 
-    .feedback-card {
-        flex: 0 0 auto;
-        width: 320px;
-        background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
-        border-radius: 18px;
-        padding: 20px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
+.scroll-btn.left { left: 0.5rem; }
+.scroll-btn.right { right: 0.5rem; }
 
-    .feedback-card:hover {
-        transform: scale(1.03);
-    }
+/* Hide native scrollbar */
+.feedback-scroll-container::-webkit-scrollbar { display: none; }
+.feedback-scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
+
 
     .stars {
         color: #FFD700;
@@ -2521,7 +2548,20 @@ html[dir="rtl"] .filter-btn { letter-spacing:0.4px; }
     </style>
 </head>
 
+{{-- <script>
+function scrollFeedback(direction) {
+    const container = document.querySelector('.feedback-scroll-container');
+    if (!container) return; // تأكد أن العنصر موجود
 
+    const scrollAmount = 320; // قيمة التحريك
+
+    if (direction === 'left') {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+}
+</script> --}}
 
 <body>
     <!-- Flying Microphone -->
@@ -2873,119 +2913,175 @@ audiobook' }}</button>
 </section>
 
 <!-- Client Feedback Section -->
-<section id="feedback" class="feedback">
+<section id="feedback" dir="{{ $locale === 'ar' ? 'rtl' : 'ltr' }}">
     <div class="container">
-        <!-- Section Header -->
         <div class="section-header" data-aos="fade-up">
             <h2>{{ $locale === 'ar' ? 'آراء العملاء' : 'Client Feedback' }}</h2>
             <p>{{ $locale === 'ar' ? 'اكتشف ماذا قال عملائي عن خدماتي في التعليق الصوتي' : 'Discover what my clients said about my voice-over services' }}</p>
         </div>
 
-        <!-- Scrollable Feedback -->
-        <div class="feedback-scroll-wrapper">
-            <div class="feedback-scroll-container" id="feedbackScroll">
-                <div class="feedback-scroll-row">
-                    @php
-                        $feedbacks = [
-                            [
-                                'text_ar' => 'ما شاء الله على الصوت، شكرًا أخي حسام، فعلاً محترف ومتمكن من عملك. ليست المرة الأولى ولن تكون الأخيرة.',
-                                'text_en' => 'MashaAllah, thank you Hossam. You’re truly professional and skilled. Not the first time I work with you and certainly not the last.',
-                                'name' => 'Younes',
-                                'title' => 'Magic Intro',
-                                'image' => 'clients/hicats.png'
-                            ],
-                            [
-                                'text_ar' => 'التعامل كان مريح جدًا والفويس أوفر ممتاز، ما احتاج تعديلات. يعطيك العافية حسام.',
-                                'text_en' => 'The process was smooth, and the voice-over was perfect with no need for edits. Thanks, Hossam!',
-                                'name' => 'Ahmed',
-                                'title' => 'Motion Graphics Designer',
-                                'image' => 'clients/ahmed.png'
-                            ],
-                            [
-                                'text_ar' => 'الصوت ممتاز جدًا. مبدع والله يا حسام، كل تعاملي هيكون معك دائمًا بإذن الله.',
-                                'text_en' => 'Amazing voice, truly creative. All my future projects will be with you, God willing!',
-                                'name' => 'Dalal',
-                                'title' => 'Graphic Designer',
-                                'image' => 'clients/dalal.png'
-                            ],
-                            [
-                                'text_ar' => 'أحد أرقى الأصوات التي تعاملت معها، صوته مميز وتعامل راقٍ واحترافي. أنصح به بشدة.',
-                                'text_en' => 'One of the finest voices I’ve worked with. Professional, smooth, and highly recommended!',
-                                'name' => 'Huda',
-                                'title' => 'Mass Media',
-                                'image' => 'clients/huda.png'
-                            ],
-                            [
-                                'text_ar' => 'عمل مميز وأداء جميل، تجربتنا معكم في لورا كانت رائعة وستتكرر بإذن الله.',
-                                'text_en' => 'Excellent work and performance. Our experience with you at Laura was great and will be repeated, God willing.',
-                                'name' => 'Anas Nadeem',
-                                'title' => 'Graphic Designer',
-                                'image' => 'clients/anas.png'
-                            ],
-                            [
-                                'text_ar' => 'خدمة صوتية احترافية بمعايير عالية. نوصي بشدة بالتعامل مع السيد حسام لأي مشروع يحتاج إلى تعليق صوتي احترافي وموثوق.',
-                                'text_en' => 'Highly professional voice-over service. We strongly recommend Mr. Hossam for any project requiring a reliable and professional voice.',
-                                'name' => 'Hind Marmash',
-                                'title' => 'Media Plus Company',
-                                'image' => 'clients/hind.png'
-                            ],
-                        ];
-                    @endphp
+        @php
+            $feedbacks = [
+                [
+                    'text_ar' => 'ما شاء الله على الصوت، شكرًا أخي حسام، فعلاً محترف ومتمكن من عملك. ليست المرة الأولى ولن تكون الأخيرة.',
+                    'text_en' => 'MashaAllah, thank you Hossam. You’re truly professional and skilled. Not the first time I work with you and certainly not the last.',
+                    'name' => 'Younes',
+                    'title' => 'Magic Intro',
+                    'image' => 'clients/hicats.png'
+                ],
+                [
+                    'text_ar' => 'التعامل كان مريح جدًا والفويس أوفر ممتاز، ما احتاج تعديلات. يعطيك العافية حسام.',
+                    'text_en' => 'The process was smooth, and the voice-over was perfect with no need for edits. Thanks, Hossam!',
+                    'name' => 'Ahmed',
+                    'title' => 'Motion Graphics Designer',
+                    'image' => 'clients/ahmed.png'
+                ],
+                [
+                    'text_ar' => 'الصوت ممتاز جدًا. مبدع والله يا حسام، كل تعاملي هيكون معك دائمًا بإذن الله.',
+                    'text_en' => 'Amazing voice, truly creative. All my future projects will be with you, God willing!',
+                    'name' => 'Dalal',
+                    'title' => 'Graphic Designer',
+                    'image' => 'clients/dalal.png'
+                ],
+                [
+                    'text_ar' => 'أحد أرقى الأصوات التي تعاملت معها، صوته مميز وتعامل راقٍ واحترافي. أنصح به بشدة.',
+                    'text_en' => 'One of the finest voices I’ve worked with. Professional, smooth, and highly recommended!',
+                    'name' => 'Huda',
+                    'title' => 'Mass Media',
+                    'image' => 'clients/huda.png'
+                ],
+                [
+                    'text_ar' => 'عمل مميز وأداء جميل، تجربتنا معكم في لورا كانت رائعة وستتكرر بإذن الله.',
+                    'text_en' => 'Excellent work and performance. Our experience with you at Laura was great and will be repeated, God willing.',
+                    'name' => 'Anas Nadeem',
+                    'title' => 'Graphic Designer',
+                    'image' => 'clients/anas.png'
+                ],
+                [
+                    'text_ar' => 'خدمة صوتية احترافية بمعايير عالية. نوصي بشدة بالتعامل مع السيد حسام لأي مشروع يحتاج إلى تعليق صوتي احترافي وموثوق.',
+                    'text_en' => 'Highly professional voice-over service. We strongly recommend Mr. Hossam for any project requiring a reliable and professional voice.',
+                    'name' => 'Hind Marmash',
+                    'title' => 'Media Plus Company',
+                    'image' => 'clients/hind.png'
+                ],
+            ];
+        @endphp
 
-                    @foreach ($feedbacks as $feedback)
-                        <div class="feedback-card">
-                            <div class="stars">
-                                @for ($i = 0; $i < 5; $i++)
-                                    <span class="star">★</span>
-                                @endfor
+        <div class="feedback-scroll-wrapper">
+            <button class="scroll-btn left" onclick="scrollFeedback('left')">‹</button>
+
+            <div class="feedback-scroll-container" id="feedbackScroll">
+                @foreach ($feedbacks as $feedback)
+                    <div class="feedback-card">
+                        <div class="stars">
+                            @for ($i = 0; $i < 5; $i++)
+                                <span class="star">★</span>
+                            @endfor
+                        </div>
+                        <p class="feedback-text">{{ $locale === 'ar' ? $feedback['text_ar'] : $feedback['text_en'] }}</p>
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <img src="{{ asset('images/' . $feedback['image']) }}" alt="{{ $feedback['name'] }}" loading="lazy">
                             </div>
-                            <p class="feedback-text">
-                                {{ $locale === 'ar' ? '"' . $feedback['text_ar'] . '"' : '"' . $feedback['text_en'] . '"' }}
-                            </p>
-                            <div class="client-info">
-                                <div class="client-avatar">
-                                    <img src="{{ asset('images/' . $feedback['image']) }}" alt="{{ $feedback['name'] }}">
-                                </div>
-                                <div class="client-details">
-                                    <h4>{{ $feedback['name'] }}</h4>
-                                    <p>{{ $feedback['title'] }}</p>
-                                </div>
+                            <div class="client-details">
+                                <h4>{{ $feedback['name'] }}</h4>
+                                <p>{{ $feedback['title'] }}</p>
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             </div>
+
+            <button class="scroll-btn right" onclick="scrollFeedback('right')">›</button>
         </div>
     </div>
 </section>
 
+<!-- JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    window.scrollFeedback = function(direction) {
+        const container = document.querySelector('.feedback-scroll-container');
+        if (!container) return;
+        const scrollAmount = 320;
+        if (direction === 'left') {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+});
+</script>
+
+<!-- CSS -->
 <style>
-.feedback-scroll-container {
-    overflow: hidden;
-    white-space: nowrap;
+.feedback-scroll-wrapper {
     position: relative;
+    overflow: hidden;
+    padding: 1rem 0;
 }
 
-.feedback-scroll-row {
+.feedback-scroll-container {
     display: flex;
-    gap: 20px;
-    animation: scroll-left 40s linear infinite;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0 3rem; /* space for buttons */
 }
 
 .feedback-card {
-    min-width: 300px;
-    background: #1e1e1e;
-    color: #fff;
-    padding: 20px;
+    flex: 0 0 auto;
+    width: 280px;
+    background: #fff;
     border-radius: 12px;
-    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 1rem;
 }
 
-@keyframes scroll-left {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* يمر كل الكروت ويرجع */
+.feedback-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
+
+.stars {
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #1E90FF, #00BFFF);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 100;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+}
+
+.scroll-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg, #00BFFF, #1E90FF);
+}
+
+.scroll-btn.left { left: 0.5rem; }
+.scroll-btn.right { right: 0.5rem; }
+
+/* Hide native scrollbar */
+.feedback-scroll-container::-webkit-scrollbar { display: none; }
+.feedback-scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
+
+
 
 
     <!-- Contact Info Section -->
@@ -3515,20 +3611,14 @@ document.head.appendChild(clickStyle);
 
 
 
-
-     function scrollFeedback(direction) {
-        const container = document.querySelector('.feedback-scroll-container');
+document.addEventListener('DOMContentLoaded', () => {
+    window.scrollFeedback = function(direction) {
+        const container = document.getElementById('feedbackScroll');
+        if (!container) return;
         const scrollAmount = 320;
-
-        if (direction === 'left') {
-            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        } else {
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
+        container.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
-
-
-
+});
 
 
 
